@@ -24,7 +24,7 @@ curl "http://nginx.org/download/nginx-1.7.8.tar.gz" -s -o - | tar xzf - -C $VEND
 # vendor nginx into the slug
 echo "-----> Vendoring nginx $NGINX_VERSION"
 mkdir -p "$BUILD_DIR/bin"
-cp "$VENDORED_NGINX" "$BUILD_DIR/bin"
+cp -r "$VENDORED_NGINX" "$BUILD_DIR/bin"
 ./${BUILD_DIR}/bin/configure --with-http_ssl_module
 
 # build a startup script
