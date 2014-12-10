@@ -25,7 +25,7 @@ curl "http://nginx.org/download/nginx-1.7.8.tar.gz" -s -o - | tar xzf - -C $VEND
 echo "-----> Vendoring nginx $NGINX_VERSION"
 mkdir -p "$BUILD_DIR/bin"
 cp -r "$VENDORED_NGINX" "$BUILD_DIR/bin"
-./${BUILD_DIR}/bin/configure --with-http_ssl_module
+.${BUILD_DIR}/bin/configure --with-http_ssl_module
 
 # build a startup script
 cat <<EOF >"$BUILD_DIR/bin/start_nginx"
