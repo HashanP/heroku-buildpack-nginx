@@ -21,6 +21,7 @@ VENDORED_NGINX=$(mktemp -d -t nginx.XXXXXX)
 echo "-----> Fetching nginx binaries"
 mkdir -p "$BUILD_DIR/bin"
 curl "http://nginx.org/download/nginx-1.7.8.tar.gz" -s -o - | tar xzf - -C "$BUILD_DIR/bin"
+ls -R ${BUILD_DIR}/bin
 
 # vendor nginx into the slug
 #echo "-----> Vendoring nginx $NGINX_VERSION"
