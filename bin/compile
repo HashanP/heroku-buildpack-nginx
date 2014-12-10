@@ -37,6 +37,6 @@ fi
 mkdir -p logs
 touch logs/access.log logs/error.log
 (tail -qF -n 0 --pid=\$\$ logs/*.log &)
-exec bin/nginx -p .
+exec bin/nginx -p . --with-http_ssl_module
 EOF
 chmod +x "$BUILD_DIR/bin/start_nginx"
