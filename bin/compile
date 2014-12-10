@@ -19,12 +19,13 @@ VENDORED_NGINX=$(mktemp -d -t nginx.XXXXXX)
 
 # download and upack packages
 echo "-----> Fetching nginx binaries"
-curl $NGINX_PACKAGE -s -o - | tar xzf - -C $VENDORED_NGINX
+curl "http://nginx.org/download/nginx-1.7.8.tar.gz" -s -o - | tar xzf - -C $VENDORED_NGINX
 
 # vendor nginx into the slug
 echo "-----> Vendoring nginx $NGINX_VERSION"
 mkdir -p "$BUILD_DIR/bin"
 cp "$VENDORED_NGINX/sbin/nginx" "$BUILD_DIR/bin/nginx"
+./${BUILD_DIR}/bin/configure --with-http_ssl_module
 
 # build a startup script
 cat <<EOF >"$BUILD_DIR/bin/start_nginx"
@@ -37,6 +38,6 @@ fi
 mkdir -p logs
 touch logs/access.log logs/error.log
 (tail -qF -n 0 --pid=\$\$ logs/*.log &)
-exec bin/nginx -p . --with-http_ssl_module
+exec bin/nginx -p .
 EOF
 chmod +x "$BUILD_DIR/bin/start_nginx"
