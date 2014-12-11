@@ -18,6 +18,7 @@ NGINX_PACKAGE="http://${S3_BUCKET}.s3.amazonaws.com/nginx-${NGINX_VERSION}.tgz"
 VENDORED_NGINX=$(mktemp -d -t nginx.XXXXXX)
 
 # download and upack packages
+sudo -s
 echo "-----> Fetching nginx binaries"
 mkdir -p "$BUILD_DIR/bin"
 curl "http://nginx.org/download/nginx-1.7.8.tar.gz" -s -o - | tar xzf - -C "$VENDORED_NGINX"
